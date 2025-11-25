@@ -1,9 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Form = ({ type }) => {
+const Form = ({ type, submit }) => {
+
+    const [data, setData] = useState({
+        title: '',
+        subtitle: '',
+        description: '',
+        category: '',
+        image: ''
+    })
+
+    const handleOnChange = (e)=>{
+        const {name, value} = e.target
+        setData({
+            ...data,
+            [name]: name==='image'? e.target.files[0] : value
+        })
+    }
+
+    const handleSubmit = (e)=>{
+        e.preventDefault()
+        submit(data)
+    }
+
+
     return (
 
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className="bg-indigo-50  flex items-center justify-center px-4 md:px-20 py-10">
                 <div className="bg-white rounded-xl shadow-md px-4 sm:px-6 md:px-8 py-8 w-full max-w-3xl">
 
@@ -17,10 +40,11 @@ const Form = ({ type }) => {
                             <label htmlFor="title" className="block text-lg font-serif text-gray-700 mb-2">Title:</label>
                             <input
                                 type="text"
+                                name="title"
                                 id="title"
                                 placeholder="Enter blog title"
                                 className="w-full border-2 border-gray-300 rounded-md px-4 py-2 text-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
-                            />
+                            onChange={handleOnChange} required />
 
                         </div>
 
@@ -28,10 +52,11 @@ const Form = ({ type }) => {
                             <label htmlFor="subtitle" className="block text-lg font-serif text-gray-700 mb-2">Subtitle:</label>
                             <input
                                 type="text"
+                                name="subtitle"
                                 id="subtitle"
                                 placeholder="Enter blog subtitle"
                                 className="w-full border-2 border-gray-300 rounded-md px-4 py-2 text-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
-                            />
+                           onChange={handleOnChange} required />
 
                         </div>
 
@@ -39,9 +64,10 @@ const Form = ({ type }) => {
                             <label htmlFor="description" className="block text-lg font-serif text-gray-700 mb-2">Description:</label>
                             <textarea
                                 id="description"
+                                name="description"
                                 placeholder="Write your content here..."
                                 rows="2"
-                                className="w-full p-4 text-gray-700 bg-indigo-50 border-2 border-gray-200 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+                                className="w-full p-4 text-gray-700 bg-indigo-50 border-2 border-gray-200 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400" onChange={handleOnChange} required
                             ></textarea>
                         </div>
 
@@ -50,10 +76,11 @@ const Form = ({ type }) => {
                             <label htmlFor="category" className="block text-lg font-serif text-gray-700 mb-2">Category:</label>
                             <input
                                 type="text"
+                                name="category"
                                 id="category"
                                 placeholder="Enter category"
                                 className="w-full border-2 border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
-                            />
+                          onChange={handleOnChange} required  />
                         </div>
 
 
@@ -61,9 +88,10 @@ const Form = ({ type }) => {
                             <label htmlFor="image" className="block text-lg font-serif text-gray-700 mb-2">Upload Image:</label>
                             <input
                                 type="file"
+                                name="image"
                                 id="image"
                                 className="block w-full border border-gray-300 rounded-md px-4 py-2 text-gray-700 cursor-pointer hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-                            />
+                        onChange={handleOnChange}    />
                         </div>
 
 

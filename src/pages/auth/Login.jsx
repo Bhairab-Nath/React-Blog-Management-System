@@ -11,6 +11,7 @@ const Login = () => {
       const response = await axios.post(`${baseUrl}/api/user/login`, data)
 
       if (response.status === 200) {
+        localStorage.setItem('token',response.data.token)
         navigate('/')
       }
       else {
