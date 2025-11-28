@@ -57,7 +57,7 @@ const SingleBlog = () => {
                             </div>
                             <div className="flex -mx-2 mb-4">
                                 <div className="w-1/2 px-2">
-                                    <Link to='/blog/edit'>
+                                    <Link to={`/blog/edit/${blog._id}`}>
                                         <button className="w-full bg-green-600  text-white py-2 px-4 rounded-full font-bold hover:bg-green-500 ">Edit</button>
                                     </Link>
                                 </div>
